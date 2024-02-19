@@ -1,5 +1,39 @@
-const GlobalState = () => {
-  return <div></div>;
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { createContext, useReducer } from "react";
+import AppReducer from "./AppReducer.jsx";
+
+const initialState = {
+  transactions: [],
 };
 
-export default GlobalState;
+export const GlobalContext = createContext(initialState);
+export const GlobalProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(AppReducer, initialState);
+
+  function addTransaction(transaction) {
+    dispatch({
+      type: "ADD_TRANSACTION",
+      payload: transaction,
+    });
+  }
+
+  function deleteTransaction(id) {
+    dispatch({
+      type: "DELETE_TRANSACTION",
+      payload: id,
+    });
+  }
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        transactions: state.transactions,
+        addTransaction,
+        deleteTransaction,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
+};

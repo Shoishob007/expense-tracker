@@ -1,8 +1,15 @@
-# React + Vite
+# useContext Hook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Created a context using useContext hook from react to track the state of the transactions.
 
-Currently, two official plugins are available:
+# Global Provider
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Propagate the context to the components using a Global Provider
+
+` export const GlobalContext = createContext(initialState);`
+
+` <GlobalContext.Provider value={{ transactions: state transactions }} > {children} </GlobalContext.Provider>`
+
+# useReducer Hook
+
+Used useReducer hook from React to take actions according to dispatch
