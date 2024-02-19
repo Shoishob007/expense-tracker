@@ -1,20 +1,29 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 import AppReducer from "./AppReducer.jsx";
 
 const initialState = {
   transactions: [],
+  selectedTransaction: null,
 };
 
 export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   function addTransaction(transaction) {
     dispatch({
       type: "ADD_TRANSACTION",
       payload: transaction,
+    });
+  }
+
+  function editTransaction(id, updatedTransaction) {
+    dispatch({
+      type: "EDIT_TRANSACTION",
+      payload: { id, updatedTransaction },
     });
   }
 
@@ -29,7 +38,10 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         transactions: state.transactions,
+        selectedTransaction,
+        setSelectedTransaction,
         addTransaction,
+        editTransaction,
         deleteTransaction,
       }}
     >

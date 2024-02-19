@@ -3,8 +3,14 @@ import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const Transaction = ({ transaction }) => {
-  const { deleteTransaction } = useContext(GlobalContext);
+  const { deleteTransaction, setSelectedTransaction } =
+    useContext(GlobalContext);
+
   const sign = transaction.amount < 0 ? "-" : "+";
+
+  const handleEditClick = () => {
+    setSelectedTransaction(transaction);
+  };
 
   return (
     <>
@@ -14,12 +20,17 @@ const Transaction = ({ transaction }) => {
           {sign}
           {Math.abs(transaction.amount)}$
         </span>
-        <button
-          className="delete-btn"
-          onClick={() => deleteTransaction(transaction.id)}
-        >
-          x
-        </button>
+        <div>
+          <button
+            className="delete-btn"
+            onClick={() => deleteTransaction(transaction.id)}
+          >
+            x
+          </button>
+          <button className="edit-btn" onClick={handleEditClick}>
+            i
+          </button>
+        </div>
       </li>
     </>
   );

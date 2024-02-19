@@ -6,6 +6,16 @@ export default (state, action) => {
         ...state,
         transactions: [action.payload, ...state.transactions],
       };
+    case "EDIT_TRANSACTION":
+      // eslint-disable-next-line no-case-declarations
+      const newTransactions = state.transactions.map((transaction) =>
+        transaction.id === action.payload.id
+          ? { ...transaction, ...action.payload.updatedTransaction }
+          : transaction
+      );
+
+      return { ...state, transactions: newTransactions };
+
     case "DELETE_TRANSACTION":
       return {
         ...state,

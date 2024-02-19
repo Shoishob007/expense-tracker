@@ -94,6 +94,7 @@ input[type="number"] {
   box-shadow: var(--box-shadow);
   color: #fff;
   border: 0;
+  border-radius: 2px;
   display: block;
   font-size: 16px;
   margin: 10px 0 30px;
@@ -102,6 +103,7 @@ input[type="number"] {
 }
 
 .btn:focus,
+.edit-btn:focus,
 .delete-btn:focus {
   outline: 0;
 }
@@ -135,6 +137,7 @@ input[type="number"] {
   cursor: pointer;
   background-color: #e74c3c;
   border: 0;
+  border-radius: 2px;
   color: #fff;
   font-size: 20px;
   line-height: 20px;
@@ -146,7 +149,24 @@ input[type="number"] {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+.edit-btn {
+  cursor: pointer;
+  background-color: #3c3ce7;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 2px 5px;
+  top: 50%;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
 .list li:hover .delete-btn {
+  opacity: 1;
+}
+.list li:hover .edit-btn {
   opacity: 1;
 }

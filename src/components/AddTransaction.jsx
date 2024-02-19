@@ -1,22 +1,36 @@
 import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const AddTransaction = () => {
   const [text, setText] = useState("");
   const [amount, setAmount] = useState(0);
-  const { addTransaction } = useContext(GlobalContext);
+  const { addTransaction, editTransaction, selectedTransaction } =
+    useContext(GlobalContext);
+
+  useEffect(() => {
+    if (selectedTransaction) {
+      setText(selectedTransaction.text);
+      setAmount(selectedTransaction.amount);
+    } else {
+      setText("");
+      setAmount(0);
+    }
+  }, [selectedTransaction]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newTransaction = {
-      id: Math.random(),
+      id: selectedTransaction ? selectedTransaction.id : Math.random(),
       text,
       amount: +amount,
     };
-
-    addTransaction(newTransaction);
+    if (selectedTransaction) {
+      editTransaction(selectedTransaction.id, newTransaction);
+    } else {
+      addTransaction(newTransaction);
+    }
     setAmount(0);
     setText("");
   };
@@ -46,7 +60,9 @@ const AddTransaction = () => {
             placeholder="Enter amount..."
           />
         </div>
-        <button className="btn">Add transaction</button>
+        <button className="btn" type="submit">
+          {selectedTransaction ? "Update" : "Add"}
+        </button>
       </form>
     </>
   );
