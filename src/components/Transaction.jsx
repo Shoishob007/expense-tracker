@@ -15,22 +15,21 @@ const Transaction = ({ transaction }) => {
   return (
     <>
       <li className={transaction.amount < 0 ? "minus" : "plus"}>
-        {transaction.text}{" "}
+        {transaction.text}
         <span>
           {sign}
           {Math.abs(transaction.amount)}$
         </span>
-        <div>
-          <button
-            className="delete-btn"
-            onClick={() => deleteTransaction(transaction.id)}
-          >
-            x
-          </button>
-          <button className="edit-btn" onClick={handleEditClick}>
-            i
-          </button>
-        </div>
+        <button
+          className="delete-btn"
+          onClick={() => deleteTransaction(transaction.id)}
+        >
+          x
+        </button>
+
+        <button className="edit-btn" onClick={handleEditClick}>
+          i
+        </button>
       </li>
     </>
   );

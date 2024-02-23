@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import AppReducer from "./AppReducer.jsx";
 
 const initialState = {
@@ -9,9 +9,20 @@ const initialState = {
 };
 
 export const GlobalContext = createContext(initialState);
+
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const transactions =
+    JSON.parse(localStorage.getItem("transactions")) || [];
+
+  const [state, dispatch] = useReducer(AppReducer, {
+    transactions: transactions,
+    selectedTransaction: null,
+  });
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(state.transactions));
+  }, [state.transactions]);
 
   function addTransaction(transaction) {
     dispatch({
@@ -43,6 +54,7 @@ export const GlobalProvider = ({ children }) => {
         addTransaction,
         editTransaction,
         deleteTransaction,
+        dispatch,
       }}
     >
       {children}

@@ -157,9 +157,11 @@ input[type="number"] {
   color: #fff;
   font-size: 20px;
   line-height: 20px;
-  padding: 2px 5px;
+  padding: 2px 7px;
+  position: absolute;
   top: 50%;
-  right: 0;
+  right: -5px;
+  transform: translate(100%, -50%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
