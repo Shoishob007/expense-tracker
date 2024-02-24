@@ -10,8 +10,8 @@ const Balance = () => {
 
   return (
     <>
-      <h4>Your Balance</h4>
-      <h1>${total}</h1>
+      <h4 className="text-lg uppercase">Your Balance</h4>
+      <h1 className="text-5xl font-bold">${total}</h1>
     </>
   );
 };

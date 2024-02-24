@@ -18,14 +18,14 @@ const IncomeExpenses = () => {
 
   return (
     <>
-      <div className="inc-exp-container">
+      <div className="inc-exp-container bg-white shadow-lg p-5 flex justify-between my-5">
         <div>
-          <h4>Income</h4>
-          <p className="money plus">{income}</p>
+          <h4 className="text-lg uppercase">Income</h4>
+          <p className="money text-xl plus">${income}</p>
         </div>
         <div>
-          <h4>Expense</h4>
-          <p className="money minus">{expense}</p>
+          <h4 className="text-lg uppercase">Expense</h4>
+          <p className="money text-xl minus">${expense}</p>
         </div>
       </div>
     </>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import { IncomeCheckBox, ExpenseCheckBox } from "./CheckBox";
 
 const AddTransaction = () => {
   const [text, setText] = useState("");
@@ -23,6 +24,16 @@ const AddTransaction = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (text.trim() === "" || amount <= 0) {
+      alert("Please fill up the form with valid inputs!");
+      return;
+    }
+
+    // Ensure that the amount starts with a non-zero digit
+    if (amount.toString().charAt(0) === "0") {
+      alert("Amount should not start with 0!");
+      return;
+    }
 
     if (text.trim() !== "" && amount !== 0) {
       const newTransaction = {
@@ -46,11 +57,12 @@ const AddTransaction = () => {
 
   return (
     <>
-      <h3>Add new transaction</h3>
-      <form onSubmit={handleSubmit}>
+      <h3 className="text-3xl font-bold">Add new transaction</h3>
+      <form className="container mx-auto" onSubmit={handleSubmit}>
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input
+            className="block w-full p-2 border border-gray-300 rounded"
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -60,6 +72,7 @@ const AddTransaction = () => {
         <div className="form-control">
           <label htmlFor="amount">Amount</label>
           <input
+            className="block w-full p-2 border border-gray-300 rounded"
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -67,30 +80,21 @@ const AddTransaction = () => {
           />
         </div>
 
-        <div className="form-control">
-          <label>
-            <input
-              type="checkbox"
-              className="plus"
-              checked={isIncome}
-              onChange={() => setIsIncome(!isIncome)}
-            />
-            Income
-          </label>
-        </div>
+        <IncomeCheckBox
+          className="plus"
+          isIncome={isIncome}
+          setIsIncome={setIsIncome}
+        />
+        <ExpenseCheckBox
+          className="minus"
+          isIncome={isIncome}
+          setIsIncome={setIsIncome}
+        />
 
-        <div className="form-control">
-          <label>
-            <input
-              type="checkbox"
-              className="minus"
-              checked={!isIncome}
-              onChange={() => setIsIncome(!isIncome)}
-            />
-            Expense
-          </label>
-        </div>
-        <button className="btn" type="submit">
+        <button
+          className="btn bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded"
+          type="submit"
+        >
           {selectedTransaction ? "Update" : "Add"}
         </button>
       </form>
