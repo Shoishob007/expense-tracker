@@ -5,18 +5,21 @@ import IncomeExpenses from "./components/IncomeExpenses.jsx";
 import TransactionList from "./components/TransactionList.jsx";
 import AddTransaction from "./components/AddTransaction.jsx";
 import { GlobalProvider } from "./context/GlobalState.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 function App() {
   return (
-    <GlobalProvider>
-      <Header />
-      <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddTransaction />
-      </div>
-    </GlobalProvider>
+    <ThemeProvider>
+      <GlobalProvider>
+        <Header />
+        <div className="container">
+          <Balance />
+          <IncomeExpenses />
+          <TransactionList />
+          <AddTransaction />
+        </div>
+      </GlobalProvider>
+    </ThemeProvider>
   );
 }
 

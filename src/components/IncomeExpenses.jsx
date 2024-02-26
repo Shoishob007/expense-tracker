@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import { useTheme } from "../context/ThemeContext";
 
 const IncomeExpenses = () => {
   const { transactions } = useContext(GlobalContext);
+  const { darkMode } = useTheme();
 
   const amounts = transactions.map((transaction) => transaction.amount);
 
@@ -18,7 +20,13 @@ const IncomeExpenses = () => {
 
   return (
     <>
-      <div className="inc-exp-container bg-white shadow-lg p-5 flex justify-between my-5">
+      <div
+        className={`inc-exp-container rounded-sm shadow-lg p-5 flex justify-between my-5 ${
+          darkMode
+            ? "bg-gray-800 text-white border-2 border-dotted"
+            : "bg-white text-gray-700"
+        }`}
+      >
         <div>
           <h4 className="text-lg uppercase">Income</h4>
           <p className="money text-xl plus text-green-500">${income}</p>

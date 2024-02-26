@@ -3,6 +3,9 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import AppReducer from "./AppReducer.jsx";
 
+
+
+
 const initialState = {
   transactions: [],
   selectedTransaction: null,

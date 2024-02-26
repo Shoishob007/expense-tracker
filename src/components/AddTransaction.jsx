@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import { IncomeCheckBox, ExpenseCheckBox } from "./CheckBox";
+import { useTheme } from "../context/ThemeContext";
 
 const AddTransaction = () => {
   const [text, setText] = useState("");
@@ -9,11 +10,12 @@ const AddTransaction = () => {
   const [isIncome, setIsIncome] = useState(true);
   const { addTransaction, editTransaction, selectedTransaction } =
     useContext(GlobalContext);
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     if (selectedTransaction) {
       setText(selectedTransaction.text);
-      setAmount(selectedTransaction.amount);
+      setAmount(Math.abs(selectedTransaction.amount));
       setIsIncome(selectedTransaction.amount >= 0);
     } else {
       setText("");
@@ -62,7 +64,9 @@ const AddTransaction = () => {
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input
-            className="block w-full p-2 border border-gray-300 rounded shadow-lg"
+            className={`block w-full p-2 border border-gray-300 rounded shadow-lg my-1 ${
+              darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-700"
+            }`}
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -72,7 +76,9 @@ const AddTransaction = () => {
         <div className="form-control">
           <label htmlFor="amount">Amount</label>
           <input
-            className="block w-full p-2 border border-gray-300 rounded shadow-lg"
+            className={`block w-full p-2 border border-gray-300 rounded shadow-lg my-1 ${
+              darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-700"
+            }`}
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -81,12 +87,12 @@ const AddTransaction = () => {
         </div>
 
         <IncomeCheckBox
-          className="plus"
+          className="plus my-1"
           isIncome={isIncome}
           setIsIncome={setIsIncome}
         />
         <ExpenseCheckBox
-          className="minus"
+          className="minus my-1"
           isIncome={isIncome}
           setIsIncome={setIsIncome}
         />
