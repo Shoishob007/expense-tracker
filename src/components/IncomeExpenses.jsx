@@ -29,11 +29,11 @@ const IncomeExpenses = () => {
       >
         <div>
           <h4 className="text-lg uppercase">Income</h4>
-          <p className="money text-xl plus text-green-500">${income}</p>
+          <p className="money text-xl plus text-green-500">{income} BDT</p>
         </div>
         <div>
           <h4 className="text-lg uppercase">Expense</h4>
-          <p className="money text-xl minus text-red-500">${expense}</p>
+          <p className="money text-xl minus text-red-500">{expense} BDT</p>
         </div>
       </div>
     </>

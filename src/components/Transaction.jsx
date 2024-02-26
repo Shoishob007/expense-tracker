@@ -31,7 +31,7 @@ const Transaction = ({ transaction }) => {
             }
           >
             {sign}
-            {Math.abs(transaction.amount)}$
+            {Math.abs(transaction.amount)} BDT
           </span>
         </span>
 
