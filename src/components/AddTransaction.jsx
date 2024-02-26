@@ -58,11 +58,11 @@ const AddTransaction = () => {
   return (
     <>
       <h3 className="text-3xl font-bold">Add new transaction</h3>
-      <form className="container mx-auto" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input
-            className="block w-full p-2 border border-gray-300 rounded"
+            className="block w-full p-2 border border-gray-300 rounded shadow-lg"
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -72,7 +72,7 @@ const AddTransaction = () => {
         <div className="form-control">
           <label htmlFor="amount">Amount</label>
           <input
-            className="block w-full p-2 border border-gray-300 rounded"
+            className="block w-full p-2 border border-gray-300 rounded shadow-lg"
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -91,12 +91,11 @@ const AddTransaction = () => {
           setIsIncome={setIsIncome}
         />
 
-        <button
-          className="btn bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded"
-          type="submit"
-        >
-          {selectedTransaction ? "Update" : "Add"}
-        </button>
+        <div className="flex justify-center">
+          <button className=" mx-auto w-20 h-10 bg-indigo-600 hover:bg-indigo-700 text-white text-sm py-2 px-4 rounded">
+            {selectedTransaction ? "Update" : "Add"}
+          </button>
+        </div>
       </form>
     </>
   );
